@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,7 +37,11 @@ namespace ejerciciosguia0
             //Ejercicio20();
             // Ejercicio21();
             //Ejercicio22();
-            Ejercicio24();
+            // Ejercicio25();
+            //Ejercicio23();
+            //Ejercicio29();
+            Ejercicio30();
+
         }
 
         //ejercicio2
@@ -361,7 +367,7 @@ namespace ejerciciosguia0
 
             Console.WriteLine("El nuúmero que nos dió, redondeado queda así: " + numero1redondeado);
         }
-
+        //Ejercicio18
         static void Ejercicio18()
         {
             double numero1;
@@ -388,7 +394,7 @@ namespace ejerciciosguia0
             Console.WriteLine("La parte entera del numero ingresado es. " + parteentera);
 
         }
-
+        //Ejercicio19
 
         static void Ejercicio19()
         {
@@ -437,7 +443,7 @@ namespace ejerciciosguia0
 
 
         }
-
+        //Ejercicio20
         static void Ejercicio20()
         {
 
@@ -445,14 +451,14 @@ namespace ejerciciosguia0
             Console.WriteLine("La fecha del día de hoy es: " + fechahoy);
             
         }
-
+        //Ejercicio21
         static void Ejercicio21()
         {
             DateTime fechahoy = DateTime.Now;
             string fechaformateada = fechahoy.ToString("dd / MM / yyyy");
             Console.WriteLine("La fecha del día de hoy es: " + fechaformateada);
         }
-        
+        //Ejercicio22
         static void Ejercicio22()
         {
             bool flag = false;
@@ -476,7 +482,30 @@ namespace ejerciciosguia0
 
 
         }
+        //Ejercicio23
 
+        static void Ejercicio23()
+        {
+            bool flag = false;
+            DateTime fecha;
+            do
+            {
+                Console.WriteLine("Ingrese una fecha con formato dd/MM/yyyy");
+                string input = Console.ReadLine();
+                if(!DateTime.TryParseExact(input, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fecha))
+                {
+
+                }
+                else
+                {
+                    flag |= true;
+                }
+
+            } while (flag==false);
+
+            Console.WriteLine("la fecha inresada es: " + fecha);
+        }
+       //Ejercicio24
         static void Ejercicio24()
         {
             bool flag = false;
@@ -525,18 +554,225 @@ namespace ejerciciosguia0
 
 
         }
-
+        //Ejercicio25
         static void Ejercicio25()
+        {
+            bool flag = false;
+            DateTime fecha;
+
+
+            do
+            {
+                Console.WriteLine("Ingrese una fecha");
+                string input = Console.ReadLine();
+
+                if (!DateTime.TryParse(input, out fecha))
+                {
+                    Console.WriteLine("Lo que ingreso no es una fecha");
+
+
+                }
+                else
+                {
+                    flag = true;
+                }
+
+            } while (flag == false);
+
+            int día = fecha.Day;
+            int mes = fecha.Month;
+            int año = fecha.Year;
+
+            string nombremes=fecha.ToString("MMM");
+            string nombrediadelasemana = fecha.ToString("dd");
+            int numerodediadelasemana = (int)fecha.DayOfWeek +1;
+
+            Console.WriteLine("el día: " + día + ", el año: " + año + ", el número y nombre del mes: " + mes + nombremes + " y el nombre y número del día de la semana: " + nombrediadelasemana + numerodediadelasemana);
+        }
+        //Ejercicio26
+
+        static void Ejercicio26()
+        {
+            bool flag = false;
+            DateTime fecha;
+            do
+            {
+                Console.WriteLine("Ingrese una fecha");
+                string input = Console.ReadLine();
+
+                if(!DateTime.TryParseExact(input,"dd/MM/yyy", CultureInfo.InvariantCulture,DateTimeStyles.None,out fecha))
+                {
+
+                    Console.WriteLine("El valor ingresado no es una fecha en el formato dd/MM/yyyy");
+
+                }
+                else
+                {
+                    flag = true;
+
+                }
+
+            } while (flag==false);
+
+            DateTime fecha30dias = fecha.AddDays(30);
+            DateTime fecha60dias = fecha.AddDays(60);
+            DateTime fecha180dias = fecha.AddDays(180);
+
+            Console.WriteLine("La fecha ingresada más 30 días: " + fecha30dias + ", la fecha ingresada más 60 días: " + fecha60dias + " y la fecha ingresada más 180 días: " + fecha180dias);
+
+
+
+
+        }
+
+        //Ejericio28
+
+        static void Ejercicio28()
+        {
+            bool flag = false;
+            DateTime fecha;
+            do
+            {
+                Console.WriteLine("Ingrese una fecha");
+                string input=Console.ReadLine();
+
+                if (!DateTime.TryParseExact(input,"dd/MM/yyyy",CultureInfo.InvariantCulture,DateTimeStyles.None, out fecha))
+                {
+                    Console.WriteLine("El valor ingresado no tiene el formato correcto");
+                }
+                else
+                {
+                    flag = true;
+
+                }
+
+            } while (flag==false);
+
+
+            DateTime mesanterior = fecha.AddMonths(-1);
+            DateTime primerodelmesanterior = new DateTime(1, mesanterior.Month, mesanterior.Year);
+
+
+            Console.WriteLine("El primero del mes anterior es : " + primerodelmesanterior);
+
+        }
+
+        //Ejercicio29 (mandar al profe)
+
+        static void Ejercicio29()
+        {
+            bool flag = false;
+            DateTime fecha;
+            do
+            {
+                Console.WriteLine("Ingrese una fecha");
+                String input = Console.ReadLine();
+                if(!DateTime.TryParseExact(input,"dd/MM/yyyy HH:mm:ss",CultureInfo.InvariantCulture,DateTimeStyles.None,out fecha))
+                {
+                    Console.WriteLine("El valor ingreado no es una fecha o no tiene el formato correspondiente");
+
+                }
+                else
+                {
+                    flag = true;
+                }
+
+            } while (flag==false);
+
+            TimeSpan hora = fecha.TimeOfDay;
+            Console.WriteLine("La hora de la fecha ingresada es: " + hora);
+
+        }
+
+        //Ejercicio30
+
+        static void Ejercicio30()
+        {
+            bool flag = false;
+            TimeSpan intervalo;
+            do
+            {
+                Console.WriteLine("Ingrese un intervalo de tiempo");
+                string input = Console.ReadLine();
+
+                if (!TimeSpan.TryParse(input,out intervalo))
+                {
+                    Console.WriteLine("El valor ingresado no es un intervalo de tiempo");
+
+                }
+                else
+                {
+
+                   flag= true;
+                    Console.WriteLine("El valor ingresado es un intervalo de tiempo");
+                }
+            } while (flag == false);
+
+
+
+
+
+        }
+
+
+        //Ejercicio31(falta hacer)
+        static void Ejercicio31()
         {
 
 
         }
 
-        
-        
-        
-        
-     
+        //Ejercicio32(FALTA HACER9
+
+        static void Ejercicio32()
+        {
+            bool flag = false;
+            DateTime fecha;
+            do
+            {
+                Console.WriteLine("Ingrese una fecha con el formato dd/MM/yyyy");
+                string input=Console.ReadLine();
+                if (!DateTime.TryParseExact(input,"dd/MM/yyyy",CultureInfo.InvariantCulture,DateTimeStyles.None,out fecha))
+                {
+                    Console.WriteLine("Elvalor ingresado no tiene el formato correcto");
+                }
+                else
+                {
+                    flag= true;
+                }
+
+            } while (flag==false);
+
+            int mes=fecha.Month;
+            int mesesquefaltanparafindeaño = 12 - mes;
+
+
+
+
+
+
+        }
+
+
+        //Ejercicio33
+
+        static void Ejercicio33()
+        {
+            DateTime endtime = DateTime.Now.AddMinutes(1);
+            do
+            {
+                DateTime fecha = DateTime.Now;
+                Console.WriteLine("La fecha actual es: " + fecha);
+                System.Threading.Thread.Sleep(10000);
+
+            } while (DateTime.Now<endtime);
+        }
+
+
+
+
+
+
 
 
 
@@ -590,12 +826,55 @@ namespace ejerciciosguia0
 
     }
 
+        
+        
+        
+        
+     
 
 
 
-       
 
-            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
